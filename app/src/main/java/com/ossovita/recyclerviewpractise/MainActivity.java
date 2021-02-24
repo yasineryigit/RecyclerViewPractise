@@ -56,6 +56,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
         cars.add(new Car(R.drawable.bmwlogo,"BMW","2018"));
         cars.add(new Car(R.drawable.honda,"Honda","2020"));
         cars.add(new Car(R.drawable.mercedes,"Mercedes","2014"));
+        cars.add(new Car(R.drawable.bmwlogo,"BMW","2022"));
 
     }
 
