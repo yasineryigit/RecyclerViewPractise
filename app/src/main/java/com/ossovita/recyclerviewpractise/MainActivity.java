@@ -1,19 +1,26 @@
 package com.ossovita.recyclerviewpractise;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
+import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements SearchView.OnQueryTextListener {
+
+
 
     private ArrayList<Car> cars;
     private RecyclerView recyclerView;
     private CarRecyclerAdapter carRecyclerAdapter;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +30,18 @@ public class MainActivity extends AppCompatActivity {
         fillTheArray();
         carRecyclerAdapter.notifyDataSetChanged();
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.toolbar,menu);
+
+        MenuItem searchItem = menu.findItem(R.id.action_search);
+        SearchView searchView = (SearchView) searchItem.getActionView();
+        searchView.setOnQueryTextListener(this);
+
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     private void fillTheArray() {
@@ -41,10 +60,31 @@ public class MainActivity extends AppCompatActivity {
 
     private void viewSettings() {
         recyclerView = findViewById(R.id.recyclerView);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
         cars = new ArrayList<>();
         carRecyclerAdapter = new CarRecyclerAdapter(cars);
         recyclerView.setAdapter(carRecyclerAdapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String s) {
+        ArrayList<Car> newCars = new ArrayList<>();
+        for(Car car : cars){
+            if(car.getBrand().toLowerCase().contains(s.toLowerCase())){
+                newCars.add(car);
+            }
+        }
+        carRecyclerAdapter.setCars(newCars);
+        carRecyclerAdapter.notifyDataSetChanged();
+
+        return true;
     }
 }

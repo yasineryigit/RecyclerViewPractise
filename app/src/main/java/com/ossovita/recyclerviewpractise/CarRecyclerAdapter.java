@@ -12,6 +12,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class CarRecyclerAdapter extends RecyclerView.Adapter<CarRecyclerAdapter.MyViewHolder> {
+    public void setCars(ArrayList<Car> cars) {
+        this.cars = cars;
+    }
+
     private ArrayList<Car> cars;
 
     public CarRecyclerAdapter(ArrayList<Car> cars) {
