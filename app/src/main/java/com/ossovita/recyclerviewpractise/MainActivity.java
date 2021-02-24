@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity implements SearchView.OnQuer
 
     private void fillTheArray() {
         cars.add(new Car(R.drawable.bmwlogo,"BMW","2020"));
-        cars.add(new Car(R.drawable.audi,"AUDİ","2020"));
+        cars.add(new Car(R.drawable.lamborghini,"Lamborghini","2018"));
         cars.add(new Car(R.drawable.mercedes,"Mercedes","2020"));
         cars.add(new Car(R.drawable.honda,"Honda","2020"));
         cars.add(new Car(R.drawable.bmwlogo,"BMW","2020"));
